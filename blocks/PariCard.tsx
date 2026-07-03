@@ -3,7 +3,7 @@
 import Image from "next/image";
 import type { Marque } from "@/logic/donnees";
 import { imageMarque } from "@/logic/images";
-import { useSuivi, type Suivi } from "@/logic/pistage";
+import { useTag, tagUrl } from "@/logic/pistage";
 import { formatNote } from "@/logic/note";
 import { Etoiles } from "./Etoiles";
 
@@ -25,22 +25,9 @@ function NoteBadge({ note, etoiles }: { note: number; etoiles: number }) {
   );
 }
 
-function buildHref(partnerPath: string, s: Suivi): string {
-  const parts = [
-    `utm_campaign=${encodeURIComponent(s.utmCampaign)}`,
-    `v=2`,
-    `decision=off`,
-    `ssid=${encodeURIComponent(s.ssid)}`,
-    `gclid=${encodeURIComponent(s.gclid)}`,
-    `gad_campaignid=${encodeURIComponent(s.gadCampaignId)}`,
-    `gad_source=${encodeURIComponent(s.gadSource)}`,
-  ];
-  return `${partnerPath}?${parts.join("&")}`;
-}
-
 export function PariCard({ marque, rang, note, etoiles, atouts }: Props) {
-  const suivi = useSuivi();
-  const href = buildHref(`/click/${marque.clickId}`, suivi);
+  const tag = useTag();
+  const href = tagUrl(marque.partnerUrl, tag);
   const logo = imageMarque(marque.logo);
 
   return (

@@ -4,7 +4,6 @@ export interface Marque {
   logo: string;
   bonusText: string;
   partnerUrl: string;
-  clickId: string;
 }
 
 export interface DonneesStade {
@@ -21,7 +20,6 @@ const marqueVedette: Marque = {
   logo: "pmu.png",
   bonusText: "JUSQU'À 100 € DE BONUS DE BIENVENUE",
   partnerUrl: "https://www.pmu.fr/",
-  clickId: "n5kx8rq2bw4mz7vhjft1py9gdu3csale",
 };
 
 export async function getStade(): Promise<DonneesStade> {
